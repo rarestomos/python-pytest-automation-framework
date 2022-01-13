@@ -21,6 +21,9 @@ This aims to be a quick-start for Python and pytest automation framework. It sho
 * for the UI testing the _Elementium_ lib has been integrated 
 * for working with the database the _sqlalchemy_ lib has been added
 
+# Specific virtual environment
+* cli _python -m venv venv_ inside your project folder ("python -m venv name_of_venv_folder")
+
 # Environment variables required
 
 # Command line options to configure execution
