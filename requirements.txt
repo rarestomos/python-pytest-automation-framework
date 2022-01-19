@@ -1,0 +1,3 @@
+pychromedriver==98.0
+pygeckodriver==0.30.0
+selenium==4.1.0
