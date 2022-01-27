@@ -20,3 +20,9 @@ def _setup_create_user():
 def get_valid_create_user_payload():
     request_body = dict(_setup_create_user()._asdict())
     return request_body
+
+
+def get_add_user_payload_without_parameter(param):
+    request_body = dict(_setup_create_user()._asdict())
+    del request_body[param]
+    return request_body
