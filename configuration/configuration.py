@@ -28,3 +28,6 @@ def get_configuration():
 
 configuration = get_configuration()
 configuration.read_configuration()
+
+backend_url = configuration.backend_url
+users_url = configuration.users_url

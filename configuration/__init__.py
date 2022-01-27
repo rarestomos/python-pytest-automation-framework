@@ -2,7 +2,7 @@ import json
 import logging.config
 import os
 
-ENV_NAME = os.environ.get('env', 'dev')
+ENV_NAME = os.environ.get('env', 'default')
 
 
 def __init_logging():
