@@ -2,8 +2,11 @@
 This module covers the Read Configuration File for TEST environment.
 """
 
-import configparser
 import os.path
+
+import configparser
+
+from configuration import ENV_NAME
 
 
 class TestConfiguration:
@@ -15,4 +18,5 @@ class TestConfiguration:
             self.configuration.read_file(f=conf_file, source='test_configuration.ini')
 
     def read_configuration(self):
-        pass
+        self.backend_url = self.configuration[ENV_NAME]['backend_url']
+        self.users_url = f'{self.backend_url}/users'
