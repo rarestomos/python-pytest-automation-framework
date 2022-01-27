@@ -1,5 +1,5 @@
 """
-This module covers the test cases for the /users endpoint
+This module covers the GET test cases for the /users endpoint
 """
 
 import pytest
@@ -12,7 +12,9 @@ from actions.user_endpoint_actions import (get_request_for_all_users,
 from models.users_model import get_valid_create_user_payload
 
 
-@pytest.mark.users_backend
+@pytest.mark.backend
+@pytest.mark.users
+@pytest.mark.get_users
 def test_get_all_users():
     response = get_request_for_all_users()
     with soft_assertions():
@@ -27,7 +29,9 @@ def test_get_all_users():
             .contains_only('id', 'first_name', 'last_name', 'email')
 
 
-@pytest.mark.users_backend
+@pytest.mark.backend
+@pytest.mark.users
+@pytest.mark.get_users
 def test_users_list_incremented_after_new_user_added():
     all_users_response = get_request_for_all_users()
     number_of_users_before = len(all_users_response.json())
@@ -40,7 +44,9 @@ def test_users_list_incremented_after_new_user_added():
         .is_equal_to(number_of_users_before + 1)
 
 
-@pytest.mark.users_backend
+@pytest.mark.backend
+@pytest.mark.users
+@pytest.mark.get_users
 def test_get_valid_user_details():
     valid_request_body = get_valid_create_user_payload()
     create_response = do_post_request_to_create_user(valid_request_body)
@@ -59,7 +65,9 @@ def test_get_valid_user_details():
             .has_email(valid_request_body['email'])
 
 
-@pytest.mark.users_backend
+@pytest.mark.backend
+@pytest.mark.users
+@pytest.mark.get_users
 def test_get_invalid_user_details():
     not_existing_user_id = str(uuid.uuid4())
     get_response = get_request_for_user(user_id=not_existing_user_id)
