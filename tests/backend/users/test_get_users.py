@@ -3,11 +3,10 @@ This module covers the GET test cases for the /users endpoint
 """
 
 import pytest
-import uuid
 from assertpy import assert_that, soft_assertions
 
 from actions.user_endpoint_actions import (get_request_for_all_users,
-                                           do_post_request_to_create_user,
+                                           post_request_to_create_user,
                                            get_request_for_user)
 from models.users_model import get_valid_create_user_payload
 
@@ -36,7 +35,7 @@ def test_users_list_incremented_after_new_user_added():
     all_users_response = get_request_for_all_users()
     number_of_users_before = len(all_users_response.json())
     valid_request_body = get_valid_create_user_payload()
-    do_post_request_to_create_user(valid_request_body)
+    post_request_to_create_user(valid_request_body)
     all_users_response = get_request_for_all_users()
     number_of_users_after = len(all_users_response.json())
     assert_that(number_of_users_after) \
@@ -47,10 +46,8 @@ def test_users_list_incremented_after_new_user_added():
 @pytest.mark.backend
 @pytest.mark.users
 @pytest.mark.get_users
-def test_get_valid_user_details():
-    valid_request_body = get_valid_create_user_payload()
-    create_response = do_post_request_to_create_user(valid_request_body)
-    valid_user_id = create_response.json()['id']
+def test_get_valid_user_details(create_valid_user):
+    valid_user_id = create_valid_user[0].json()['id']
     get_response = get_request_for_user(user_id=valid_user_id)
     user = get_response.json()
     with soft_assertions():
@@ -60,21 +57,20 @@ def test_get_valid_user_details():
         assert_that(user) \
             .described_as('The newly created user is not properly displayed on GET one user request!') \
             .has_id(valid_user_id) \
-            .has_first_name(valid_request_body['first_name']) \
-            .has_last_name(valid_request_body['last_name']) \
-            .has_email(valid_request_body['email'])
+            .has_first_name(create_valid_user[1]['first_name']) \
+            .has_last_name(create_valid_user[1]['last_name']) \
+            .has_email(create_valid_user[1]['email'])
 
 
 @pytest.mark.backend
 @pytest.mark.users
 @pytest.mark.get_users
-def test_get_invalid_user_details():
-    not_existing_user_id = str(uuid.uuid4())
-    get_response = get_request_for_user(user_id=not_existing_user_id)
+def test_get_invalid_user_details(invalid_user_id):
+    get_response = get_request_for_user(user_id=invalid_user_id)
     with soft_assertions():
         assert_that(get_response.status_code) \
             .described_as('Trying to GET a not existing user did not revert 400 status code!') \
             .is_equal_to(400)
         assert_that(get_response.json()) \
             .described_as('Trying to GET a not existing user did not revert the right message!') \
-            .is_equal_to(f'User with id = {not_existing_user_id} was not found')
+            .is_equal_to(f'User with id = {invalid_user_id} was not found')
