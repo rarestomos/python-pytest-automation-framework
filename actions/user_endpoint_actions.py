@@ -65,3 +65,19 @@ def delete_request_for_user(user_id):
     logger.debug(f'Got response: {response.json()}' if response.ok
                  else f'Status code was {response.status_code} because: {response.reason}')
     return response
+
+
+#  PUT
+def put_request_to_update_user(user_id, user):
+    """
+    Do an update request (PUT) for one existing user
+    :param user_id: the ID of the user
+    :param user: the updated user details
+    :return: the user object with updated details
+    """
+    url = f'{users_url}/{user_id}'
+    logger.debug(f'Doing a PUT request to the USERS endpoint: {url}')
+    response = requests.put(url=url, data=json.dumps(user))
+    logger.debug(f'Got response: {response.json()}' if response.ok
+                 else f'Status code was {response.status_code} because: {response.reason}')
+    return response
