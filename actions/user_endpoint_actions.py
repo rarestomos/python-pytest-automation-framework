@@ -37,8 +37,8 @@ def get_request_for_user(user_id):
     return response
 
 
-# POST
-def do_post_request_to_create_user(user):
+#  POST
+def post_request_to_create_user(user):
     """
     Do a POST request to add a user
     :param user: the new user details
@@ -47,6 +47,21 @@ def do_post_request_to_create_user(user):
     url = users_url
     logger.debug(f'Doing a POST request to the endpoint: {url}')
     response = requests.post(url=url, data=json.dumps(user))
+    logger.debug(f'Got response: {response.json()}' if response.ok
+                 else f'Status code was {response.status_code} because: {response.reason}')
+    return response
+
+
+#  DELETE
+def delete_request_for_user(user_id):
+    """
+    Do a DELETE request for one user
+    :param user_id: the ID of the user
+    :return: message after delete action
+    """
+    url = f'{users_url}/{user_id}'
+    logger.debug(f'Doing a DELETE one user request to the USERS endpoint: {url}')
+    response = requests.delete(url=url)
     logger.debug(f'Got response: {response.json()}' if response.ok
                  else f'Status code was {response.status_code} because: {response.reason}')
     return response
