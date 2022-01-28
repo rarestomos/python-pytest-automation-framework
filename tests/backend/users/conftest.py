@@ -29,7 +29,6 @@ def create_valid_user():
     """
     valid_request_body = get_valid_create_user_payload()
     response = post_request_to_create_user(valid_request_body)
-    print(f"NEW USER ID: {response.json()['id']}")
     yield response, valid_request_body
     user_id = response.json()['id']
     delete_request_for_user(user_id=user_id)
