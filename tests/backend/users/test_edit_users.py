@@ -5,7 +5,7 @@ This module covers the PUT test cases for the /users endpoint
 import pytest
 from assertpy import assert_that, soft_assertions
 
-from actions.user_endpoint_actions import put_request_to_update_user
+from actions.users_endpoint_actions import put_request_to_update_user
 from tests import fake
 
 
