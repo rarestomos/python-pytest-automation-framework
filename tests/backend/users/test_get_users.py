@@ -5,9 +5,10 @@ This module covers the GET test cases for the /users endpoint
 import pytest
 from assertpy import assert_that, soft_assertions
 
-from actions.user_endpoint_actions import (get_request_for_all_users,
-                                           post_request_to_create_user,
-                                           get_request_for_user)
+from actions.users_endpoint_actions import (get_request_for_all_users,
+                                            post_request_to_create_user,
+                                            get_request_for_user,
+                                            delete_request_for_user)
 from models.users_model import get_valid_create_user_payload
 
 
@@ -35,12 +36,14 @@ def test_users_list_incremented_after_new_user_added():
     all_users_response = get_request_for_all_users()
     number_of_users_before = len(all_users_response.json())
     valid_request_body = get_valid_create_user_payload()
-    post_request_to_create_user(valid_request_body)
+    response = post_request_to_create_user(valid_request_body)
     all_users_response = get_request_for_all_users()
     number_of_users_after = len(all_users_response.json())
     assert_that(number_of_users_after) \
         .described_as('The list of users was not incremented after creating a new user!') \
         .is_equal_to(number_of_users_before + 1)
+    user_id = response.json()['id']
+    delete_request_for_user(user_id=user_id)
 
 
 @pytest.mark.backend
@@ -65,12 +68,12 @@ def test_get_valid_user_details(create_valid_user):
 @pytest.mark.backend
 @pytest.mark.users
 @pytest.mark.get_users
-def test_get_invalid_user_details(invalid_user_id):
-    get_response = get_request_for_user(user_id=invalid_user_id)
+def test_get_invalid_user_details(invalid_id):
+    get_response = get_request_for_user(user_id=invalid_id)
     with soft_assertions():
         assert_that(get_response.status_code) \
             .described_as('Trying to GET a not existing user did not revert 400 status code!') \
             .is_equal_to(400)
         assert_that(get_response.json()) \
             .described_as('Trying to GET a not existing user did not revert the right message!') \
-            .is_equal_to(f'User with id = {invalid_user_id} was not found')
+            .is_equal_to(f'User with id = {invalid_id} was not found')

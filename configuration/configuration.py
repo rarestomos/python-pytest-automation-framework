@@ -31,3 +31,4 @@ configuration.read_configuration()
 
 backend_url = configuration.backend_url
 users_url = configuration.users_url
+books_url = configuration.books_url

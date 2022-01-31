@@ -5,7 +5,7 @@ This module covers the POST test cases for the /users endpoint
 import pytest
 from assertpy import assert_that, soft_assertions
 
-from actions.user_endpoint_actions import post_request_to_create_user
+from actions.users_endpoint_actions import post_request_to_create_user
 from models.users_model import get_valid_create_user_payload, get_add_user_payload_without_parameter
 
 

@@ -1,3 +1,7 @@
+"""
+Define users MODELS used across testing framework, based on namedtuple library.
+"""
+
 from collections import namedtuple
 
 from models import fake
