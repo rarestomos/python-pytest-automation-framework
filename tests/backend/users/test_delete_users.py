@@ -30,8 +30,8 @@ def test_cannot_delete_user_with_invalid_user_id(invalid_id):
     delete_response = delete_request_for_user(invalid_id)
     with soft_assertions():
         assert_that(delete_response.status_code) \
-            .described_as('Trying to DELETE user with user id that does not exist did not revert 400 status code!') \
+            .described_as('Trying to DELETE user with user_id that does not exist did not revert 400 status code!') \
             .is_equal_to(400)
         assert_that(delete_response.json()) \
-            .described_as('Trying to DELETE user with user id that does not exist did not revert the right message!') \
+            .described_as('Trying to DELETE user with user_id that does not exist did not revert the right message!') \
             .is_equal_to(f'User with id = {invalid_id} was not found')
