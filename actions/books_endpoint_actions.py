@@ -65,3 +65,19 @@ def delete_request_for_book(book_id):
     logger.debug(f'Got response: {response.json()}' if response.ok
                  else f'Status code was {response.status_code} because {response.reason}')
     return response
+
+
+#  PUT
+def put_request_to_update_book(book_id, book):
+    """
+    Do a PUT request to update details for a book
+    :param book_id: the ID of the book
+    :param book: the details to update
+    :return: the book object with updated details
+    """
+    url = f'{books_url}/{book_id}'
+    logger.debug(f'Doing a PUT request to the endpoint: {url}')
+    response = requests.put(url=url, data=json.dumps(book))
+    logger.debug(f'Got response: {response.json()}' if response.ok
+                 else f'Status code was {response.status_code} because {response.reason}')
+    return response
