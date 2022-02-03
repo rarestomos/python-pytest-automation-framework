@@ -24,6 +24,10 @@ This aims to be a quick-start for Python and pytest automation framework. It sho
 # Specific virtual environment
 * cli _python -m venv venv_ inside your project folder ("python -m venv name_of_venv_folder")
 
+# Reporting
+* to execute a specific test suite based on marker name, following command should be used at tests runtime:
+* E.g. For "backend" tests: _pytest -m backend --template=html1/index.html --report=reports/backend_tests_report.html_
+
 # Environment variables required
 
 # Command line options to configure execution
