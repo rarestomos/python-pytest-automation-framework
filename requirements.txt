@@ -3,5 +3,6 @@ Faker==11.3.0
 pychromedriver==98.0
 pygeckodriver==0.30.0
 pytest==6.2.5
+pytest-reporter-html1==0.8.2
 requests==2.27.1
 selenium==4.1.0
