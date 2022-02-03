@@ -42,9 +42,8 @@ def test_several_users_cannot_be_added_with_same_email(create_valid_user):
 @pytest.mark.backend
 @pytest.mark.users
 @pytest.mark.create_users
-@pytest.mark.parametrize('param, reason',
-                         [('first_name', 'required'), ('last_name', 'required'), ('email', 'required')])
-def test_cannot_add_user_without_param(param, reason):
+@pytest.mark.parametrize('param', ['first_name', 'last_name', 'email'])
+def test_cannot_add_user_without_param(param):
     request_body = get_add_user_payload_without_parameter(param=param)
     response = post_request_to_create_user(request_body)
     with soft_assertions():
@@ -53,7 +52,7 @@ def test_cannot_add_user_without_param(param, reason):
             .is_equal_to(400)
         assert_that(response.json()) \
             .described_as(f'Trying to POST a new user without "{param}" did not revert the right message!') \
-            .is_equal_to(f"'{param}' is {reason}")
+            .is_equal_to(f"'{param}' is required")
 
 
 @pytest.mark.backend

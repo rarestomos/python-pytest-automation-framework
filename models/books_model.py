@@ -35,3 +35,9 @@ def get_valid_book_payload_minimum_required():
     del request_body['description']
     del request_body['cover']
     return request_body
+
+
+def get_add_book_payload_without_parameter(param):
+    request_body = dict(_setup_create_book()._asdict())
+    del request_body[param]
+    return request_body
