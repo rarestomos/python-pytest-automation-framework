@@ -42,7 +42,7 @@ def test_book_can_be_created_with_all_params(create_book_all_details):
 @pytest.mark.books
 @pytest.mark.create_books
 @pytest.mark.parametrize('param', ['author', 'name'])
-def test_create_book_existing_author_different_title(create_valid_book, param):
+def test_create_book_existing_author_different_param(create_valid_book, param):
     same_entity = create_valid_book[1][param]
     request_body = get_valid_book_payload_minimum_required()
     request_body[param] = same_entity
