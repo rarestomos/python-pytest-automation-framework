@@ -1,8 +1,10 @@
 assertpy==1.1
+elementium==2.0.2
 Faker==11.3.0
-pychromedriver==98.0
+pychromedriver==97.0
 pygeckodriver==0.30.0
 pytest==6.2.5
 pytest-reporter-html1==0.8.2
+pytest-xdist==2.5.0
 requests==2.27.1
-selenium==4.1.0
+selenium==3.141

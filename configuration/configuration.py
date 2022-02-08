@@ -30,5 +30,7 @@ configuration = get_configuration()
 configuration.read_configuration()
 
 backend_url = configuration.backend_url
+frontend_url = configuration.frontend_url
 users_url = configuration.users_url
 books_url = configuration.books_url
+max_timeout = configuration.max_timeout

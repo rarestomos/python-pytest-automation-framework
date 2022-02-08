@@ -19,5 +19,7 @@ class TestConfiguration:
 
     def read_configuration(self):
         self.backend_url = self.configuration[ENV_NAME]['backend_url']
+        self.frontend_url = self.configuration[ENV_NAME]['frontend_url']
         self.users_url = f'{self.backend_url}/users'
         self.books_url = f'{self.backend_url}/books'
+        self.max_timeout = int(self.configuration[ENV_NAME]["max_timeout"])
