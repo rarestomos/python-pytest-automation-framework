@@ -3,6 +3,7 @@ import logging.config
 import os
 
 ENV_NAME = os.environ.get('env', 'default')
+BROWSER = os.environ.get('browser', 'chrome')
 
 
 def __init_logging():

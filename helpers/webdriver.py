@@ -3,12 +3,11 @@ This module covers the WebDriver Interface for UI testing framework Test Cases.
 """
 
 import sys
-from tokenize import String
-
 from pychromedriver import chromedriver_path
 from pygeckodriver import geckodriver_path
 from selenium import webdriver
 from selenium.webdriver import DesiredCapabilities
+from tokenize import String
 
 
 def get_driver(browser: String):

@@ -1,5 +1,5 @@
 """
-This module contains the fixtures defined to be shared among all tests in 'books' test suite.
+This module contains the fixtures defined to be shared among all tests.
 """
 
 import pytest
